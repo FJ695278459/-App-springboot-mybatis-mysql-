@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuron.etl.mapper.master.SysTestMapper">
+    <select id="getTest" resultType="com.neuron.etl.model.master.Test">
+        select * from test;
+    </select>
+    <select id="selectOne" resultType="com.neuron.etl.model.master.Test" parameterType="string">
+        select * from test
+        <where>
+                id=#{id}
+        </where>
+    </select>
+    <insert id="insertTest" parameterType="com.neuron.etl.model.master.Test">
+        insert  INTO test(id,password) Value (#{id},#{password});
+    </insert>
+    <select id="selectOnes" resultType="com.neuron.etl.model.master.Test" parameterType="string" >
+        select * from test
+        <where>
+            id=#{p}
+        </where>
+    </select>
+    <update id="updateTestTime"  parameterType="string">
+        UPDATE test set time=#{time}
+        <where>
+            id=#{id}
+        </where>
+    </update>
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuron.etl.mapper.master.SysUserMapper">
+    <select id="selectAll" resultType="com.neuron.etl.model.master.User">
+        select * from user
+    </select>
+    <select id="selectOne" resultType="com.neuron.etl.model.master.User" parameterType="string">
+        select * from user
+       <where>
+           userid=#{userid}
+       </where>
+    </select>
+    <select id="selectPhone" resultType="com.neuron.etl.model.master.User" parameterType="string">
+        select * from user
+        <where>
+            phone=#{phone}
+        </where>
+    </select>
+
+    <select id="selectPhonePass" resultType="com.neuron.etl.model.master.User" parameterType="string">
+        select * from user
+        <where>
+            phone=#{phone} and userpass=#{userpass}
+        </where>
+    </select>
+    <select id="selectOneQQ" resultType="com.neuron.etl.model.master.User" parameterType="string">
+        select * from user
+        <where>
+            QQToken=#{QQToken}
+        </where>
+    </select>
+    <select id="selectCollect" resultType="integer" parameterType="string">
+        select collects from user
+        <where>
+            userid=#{id}
+        </where>
+    </select>
+    <select id="selectPostnumber" resultType="integer" parameterType="string">
+        select postnumber from user
+        <where>
+            userid=#{id}
+        </where>
+    </select>
+    <select id="selectScore" resultType="integer" parameterType="string">
+        select score from user
+        <where>
+            userid=#{id}
+        </where>
+    </select>
+    <select id="selectUserLike" resultType="com.neuron.etl.model.master.User" parameterType="string">
+        select * from user where username like "%"#{str}"%" or userid=#{str}
+    </select>
+    <insert id="insertMast" parameterType="com.neuron.etl.model.master.User">
+        insert into user(userid,userpass,username,RegTime,LastLogTime,userhead,age,sex,QQToken,school,son,score,postnumber,collects,signature,phone) value
+        (#{userid},#{userpass},#{username},#{RegTime},#{LastLogTime},#{userhead},#{age},#{sex},#{QQToken},#{school},#{son},#{score},#{postnumber},#{collects},#{signature},#{phone});
+    </insert>
+    <update id="updateUserTegTime"  parameterType="string">
+        UPDATE user set LastLogTime=#{time}
+        <where>
+            userid=#{userid}
+        </where>
+    </update>
+    <update id="updateNameinfo" parameterType="com.neuron.etl.model.master.User">
+        update user set username =#{username},sex=#{sex},age=#{age},userhead=#{userhead}
+        <where>
+            userid=#{userid}
+        </where>
+    </update>
+    <update id="updateall" parameterType="com.neuron.etl.model.master.User">
+        update user set userpass=#{userpass},username =#{username},sex=#{sex},age=#{age},userhead=#{userhead},school=#{school},son=#{son},signature=#{signature}
+        <where>
+            userid=#{userid}
+        </where>
+    </update>
+    <update id="updateHeadinfo" parameterType="string">
+        update user set Head=#{Head}
+        <where>
+            id=#{id}
+        </where>
+    </update>
+    <update id="updateSoninfo" parameterType="com.neuron.etl.model.master.User">
+        update user set school=#{school},son=#{son}
+        <where>
+            userid=#{userid}
+        </where>
+    </update>
+    <update id="updateCollectinfo" parameterType="string">
+        update user set collects=collects+1
+        <where>
+            userid=#{userid}
+        </where>
+    </update>
+    <update id="updatePostnumbertinfo" parameterType="string">
+        update user set postnumber=postnumber+1
+        <where>
+            userid=#{userid}
+        </where>
+    </update>
+    <update id="updateScoreinfo" parameterType="com.neuron.etl.model.master.User">
+        update user set score=#{score}
+        <where>
+            userid=#{userid}
+        </where>
+    </update>
+</mapper>

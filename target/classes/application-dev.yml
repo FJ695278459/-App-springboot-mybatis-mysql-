@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      datasource:
+        master:
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/bees?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT&autoReconnect=true&allowMultiQueries=true
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    static-path-pattern: /image/**
+  resources:
+    static-locations: static/,file:C:/file/img
+
+server:
+  port: 80
+
+mybatis-plus:
+  mapper-locations: classpath*:**/xml/*Mapper.xml
+
+img:
+  a: 1f
+  b: 0.09f

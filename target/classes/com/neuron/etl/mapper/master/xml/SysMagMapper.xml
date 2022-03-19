@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuron.etl.mapper.master.SysMagMapper">
+
+
+    <select id="selectOne" resultType="com.neuron.etl.model.master.Mag" parameterType="string">
+        select * from mags
+
+    </select>
+    <update id="updatahomemag" parameterType="String">
+        update mags set homemag=#{homemag}
+    </update>
+    <insert id="insertAppmag" parameterType="com.neuron.etl.model.master.AppMag">
+        insert into appmag(VersionCode,num) value (#{VersionCode},#{num})
+    </insert>
+    <select id="selectAppmagOne" parameterType="string" resultType="com.neuron.etl.model.master.AppMag">
+        select * from appmag
+        <where>
+            VersionCode=#{VersionCode}
+        </where>
+    </select>
+    <select id="selectAppmagAll" parameterType="string" resultType="com.neuron.etl.model.master.AppMag">
+        select * from appmag
+    </select>
+    <update id="updateAppmag" parameterType="string">
+        update appmag set num=num+1
+        <where>
+            VersionCode=#{VersionCode}
+        </where>
+    </update>
+</mapper>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuron.etl.mapper.master.SysSonMapper">
+    <insert id="insert" parameterType="com.neuron.etl.model.master.Son">
+        insert into son(son,pass) value (#{son},#{pass})
+    </insert>
+    <select id="selectSon" resultType="com.neuron.etl.model.master.Son" parameterType="String">
+        select * from son
+        <where>
+            son=#{son}
+        </where>
+    </select>
+    <update id="updataPak" parameterType="String">
+        update pak set num=num+1
+        <where>
+            id=#{id}
+        </where>
+    </update>
+    <update id="updatazf" parameterType="String">
+        update pak set zf=zf+1
+        <where>
+            id=#{id}
+        </where>
+    </update>
+    <select id="selectNum" resultType="com.neuron.etl.model.master.Zf" parameterType="String">
+        select * from pak
+        <where>
+            id=#{id}
+        </where>
+    </select>
+    <insert id="insertnotecard" parameterType="com.neuron.etl.model.master.Notecard">
+        insert  into notecard(id,content,posttime) value (#{id},#{content},#{posttime})
+    </insert>
+
+    <select id="selectnotecard" resultType="com.neuron.etl.model.master.Notecard" parameterType="string">
+        select * from notecard
+        <where>
+            id=#{id}
+        </where>
+    </select>
+    <select id="selectnotecardall" resultType="com.neuron.etl.model.master.Notecard" >
+        select * from notecard;
+    </select>
+    <select id="selectmag" resultType="com.neuron.etl.model.master.Mag" parameterType="string">
+        select * from mags
+
+    </select>
+    <update id="updatahomemag" parameterType="String">
+        update mags set homemag=#{homemag}
+    </update>
+
+<!--    反馈-->
+    <insert id="insertfeedback" parameterType="com.neuron.etl.model.master.Feedback">
+        insert into feedback(feedbackid,content,userid,intime,mold) value (#{feedbackid},#{content},#{userid},#{intime},#{mold})
+    </insert>
+    <select id="selectfeedbackall" resultType="com.neuron.etl.model.master.Feedback">
+        select * from feedback
+    </select>
+    <select id="selectfeedbackUserid" resultType="com.neuron.etl.model.master.Feedback" parameterType="string">
+        select * from feedback
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+    <select id="selectFeedbackId" resultType="com.neuron.etl.model.master.Feedback" parameterType="string">
+        select * from feedback
+        <where>
+            feedbackid=#{feedbackid}
+        </where>
+    </select>
+    <delete id="DeleteFeedbackUserid" parameterType="string" >
+        delete feedback from feedback
+        <where>
+            userid=#{userid}
+        </where>
+    </delete>
+    <delete id="DeleteFeedbackFeedbackId" parameterType="string" >
+        delete feedback from feedback
+        <where>
+            Feedbackid=#{Feedbackid}
+        </where>
+    </delete>
+    <insert id="InsertToken" parameterType="string">
+        insert into token(userid,token) value (#{userid},#{token})
+    </insert>
+    <select id="SelsctToken" resultType="string" parameterType="string">
+        select token from token where userid=#{userid}
+    </select>
+    <select id="SelsctTokenAll" resultType="com.neuron.etl.model.master.Token">
+        select * from token
+    </select>
+
+
+    <select id="SelsctAllLike" resultType="object" parameterType="string">
+        select * from user,invitation content like "%"#{str}"%" or title like "%"#{str}"%" or inviid=#{str} or username like "%"#{str}"%" or userid=#{str}
+    </select>
+
+    <update id="UpdateToken"  parameterType="string">
+        update token set token=#{token} where userid=#{userid}
+    </update>
+</mapper>

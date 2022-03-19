@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuron.etl.mapper.master.SysCommentReplyMapper">
+    <insert id="insert" parameterType="com.neuron.etl.model.master.CommentReply">
+        insert into commentreply(replyid,inviid,userhead,username,userid,infoid,content,intime,likenum)
+        value (#{replyid},#{inviid},#{userhead},#{username},#{userid},#{infoid},#{content},#{intime},#{likenum})
+
+    </insert>
+    <select id="selectAll" resultType="com.neuron.etl.model.master.CommentReply" parameterType="string">
+        select * from commentreply
+        <where>
+            infoid=#{infoid}
+        </where>
+    </select>
+    <select id="selectone" parameterType="string" resultType="com.neuron.etl.model.master.CommentReply">
+        select * from commentreply
+        <where>
+            replyid=#{replyid}
+        </where>
+    </select>
+
+    <select id="selectuser" parameterType="string" resultType="com.neuron.etl.model.master.CommentReply">
+        select * from commentreply
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+
+    <select id="selectinfo" resultType="com.neuron.etl.model.master.CommentReply" parameterType="string">
+        select * from commentreply
+        <where>
+            infoid=#{infoid}
+        </where>
+        limit #{start},#{end};
+    </select>
+    <select id="selectinvi" resultType="com.neuron.etl.model.master.CommentReply" parameterType="string">
+        select * from commentreply
+        <where>
+            inviid=#{inviid}
+        </where>
+    </select>
+    <delete id="deleteone" parameterType="string">
+        delete commentreply from commentreply
+        <where>
+            replyid=#{replyid}
+        </where>
+    </delete>
+    <delete id="deleteinfo" parameterType="string">
+        delete commentreply from commentreply
+        <where>
+            infoid=#{infoid}
+        </where>
+    </delete>
+    <delete id="deleteinvi" parameterType="string">
+        delete commentreply from commentreply
+        <where>
+            inviid=#{inviid}
+        </where>
+    </delete>
+    <update id="updateAddlikes" parameterType="string">
+        update commentreply set likenum=likenum+1
+        <where>
+            replyid=#{replyid}
+        </where>
+    </update>
+    <update id="updateDonelikes" parameterType="string">
+        update commentreply set likenum=likenum-1
+        <where>
+            replyid=#{replyid}
+        </where>
+    </update>
+</mapper>

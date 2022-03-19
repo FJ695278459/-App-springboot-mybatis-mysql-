@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuron.etl.mapper.master.SysCollentMapper">
+    <insert id="insert" parameterType="com.neuron.etl.model.master.Collect">
+        insert into collect(collectid,userid,inviid,intime) value (#{collectid},#{userid},#{inviid},#{intime})
+    </insert>
+    <select id="selectAll" resultType="com.neuron.etl.model.master.Collect" parameterType="string">
+        select * from collect
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+
+    <select id="numBerCollect" resultType="integer">
+        select count(*) from collect
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+
+
+    <delete id="deleteone">
+        delete from collent limit 1;
+    </delete>
+    <delete id="deleteson" parameterType="integer">
+        delete from collect
+        <where>
+            collectid=#{collectid}
+        </where>
+    </delete>
+
+</mapper>

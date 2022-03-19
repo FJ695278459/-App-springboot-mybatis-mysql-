@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuron.etl.mapper.master.SysInvitationMapper">
+    <insert id="insertAll" parameterType="com.neuron.etl.model.master.Invitation">
+        insert into invitation (inviid,userid,userhead,username,postTime,Boardid,likes,collects,readly,content,title,reply)
+            value (#{inviid},#{userid},#{userhead},#{username},#{postTime},#{Boardid},#{likes},#{collects},#{readly},#{content},#{title},#{reply});
+    </insert>
+    <select id="selectAll" resultType="com.neuron.etl.model.master.Invitation">
+        select * from invitation;
+    </select>
+    <select id="selectOne" resultType="com.neuron.etl.model.master.Invitation">
+        select * from invitation
+        <where>
+            inviid=#{id}
+        </where>
+    </select>
+    <select id="selectOneUserid" resultType="com.neuron.etl.model.master.Invitation">
+        select * from invitation
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+    <select id="selectsSon" resultType="com.neuron.etl.model.master.Invitation">
+        select * from invitation limit #{start},#{end}
+    </select>
+    <select id="selsectLike" resultType="com.neuron.etl.model.master.Invitation" parameterType="string">
+        select * from invitation where content like "%"#{str}"%" or title like "%"#{str}"%" or inviid=#{str}
+    </select>
+    <select id="numBerInvi" resultType="integer">
+        select count(*) from invitation;
+    </select>
+    <delete id="delete" parameterType="string">
+        delete invitation
+        from invitation
+        <where>
+            inviid=#{inviid}
+        </where>
+    </delete>
+    <update id="updateAddlikes" parameterType="string">
+        update invitation set likes=likes+1
+        <where>
+            inviid=#{inviid}
+        </where>
+    </update>
+    <update id="updateDonelikes" parameterType="string">
+        update invitation set likes=likes-1
+        <where>
+            inviid=#{inviid}
+        </where>
+    </update>
+    <update id="updateAddCollect" parameterType="string">
+        update invitation set collects=collects+1
+        <where>
+            inviid=#{inviid}
+        </where>
+    </update>
+    <update id="updateDoneCollect" parameterType="string">
+        update invitation set collects=collects-1
+        <where>
+            inviid=#{inviid}
+        </where>
+    </update>
+    <update id="updateAddReply" parameterType="string">
+        update invitation set reply=reply+1
+        <where>
+            inviid=#{inviid}
+        </where>
+    </update>
+    <update id="updateDoneReply" parameterType="string">
+        update invitation set reply=reply-1
+        <where>
+            inviid=#{inviid}
+        </where>
+    </update>
+    <update id="updateAddReadly" parameterType="string">
+        update invitation set readly=readly+1
+        <where>
+            inviid=#{inviid}
+        </where>
+    </update>
+    <update id="updateDoneReadly" parameterType="string">
+        update invitation set readly=readly-1
+        <where>
+            inviid=#{inviid}
+        </where>
+    </update>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuron.etl.mapper.master.SysCommentInfoMapper">
+   <insert id="insert" parameterType="com.neuron.etl.model.master.CommentInfo">
+       insert into commentinfo(infoid,inviid,userid,username,userhead,likenum,content,intime)
+       value (#{infoid},#{inviid},#{userid},#{username},#{userhead},#{likenum},#{content},#{intime})
+   </insert>
+    <select id="selectone" parameterType="string" resultType="com.neuron.etl.model.master.CommentInfo">
+        select * from commentinfo
+        <where>
+            infoid=#{infoid}
+        </where>
+    </select>
+    <select id="selectuser" parameterType="string" resultType="com.neuron.etl.model.master.CommentInfo">
+        select * from commentinfo
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+    <select id="selectAll" parameterType="string" resultType="com.neuron.etl.model.master.CommentInfo">
+        select * from commentinfo
+        <where>
+            inviid=#{inviid}
+        </where>
+    </select>
+    <select id="selectson" parameterType="string" resultType="com.neuron.etl.model.master.CommentInfo">
+        select * from commentinfo
+        <where>
+            inviid=#{inviid}
+        </where>
+        limit #{start},#{end};
+    </select>
+    <delete id="deleteone" parameterType="string">
+        delete commentinfo
+        from commentinfo
+        <where>
+            commentinfo.infoid=#{infoid}
+        </where>
+    </delete>
+    <delete id="deleteinvi" parameterType="string">
+        delete commentinfo
+        from commentinfo
+        <where>
+            inviid=#{inviid}
+        </where>
+    </delete>
+    <update id="updateAddlikes" parameterType="string">
+        update commentinfo set likenum=likenum+1
+        <where>
+            infoid=#{infoid}
+        </where>
+    </update>
+    <update id="updateDonelikes" parameterType="string">
+        update commentinfo set likenum=likenum-1
+        <where>
+            infoid=#{infoid}
+        </where>
+    </update>
+</mapper>
